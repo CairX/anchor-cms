@@ -7,6 +7,7 @@ return array(
     'cookie_path' => '/',
     'cookie_domain' => '',
     'cookie_secure' => false,
+    'hash_function' => 'md5',
     'hash_function' => 'sha256',
     'use_cookies' => true,
     'use_only_cookies' => true,
