@@ -74,6 +74,10 @@ class rss
         $item = $this->element('item');
         $this->channel->appendChild($item);
 
+        // guid
+        $guid = $this->element('guid', $url);
+        $item->appendChild($guid);
+
         // title
         $title = $this->element('title', $title);
         $item->appendChild($title);
