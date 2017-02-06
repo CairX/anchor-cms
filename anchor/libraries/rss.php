@@ -69,7 +69,7 @@ class rss
         $this->channel->appendChild($atom);
     }
 
-    public function item($title, $url, $description, $date)
+    public function item($title, $url, $description, $date, $comments)
     {
         $item = $this->element('item');
         $this->channel->appendChild($item);
@@ -89,6 +89,12 @@ class rss
         // date
         $date = $this->element('pubDate', date(DATE_RSS, strtotime($date)));
         $item->appendChild($date);
+
+        // comments
+        if ($comments) {
+            $comments = $this->element('comments', $url . '#comment');
+            $item->appendChild($comments);
+        }
     }
 
     public function output()

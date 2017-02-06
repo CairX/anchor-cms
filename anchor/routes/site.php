@@ -208,7 +208,8 @@ Route::get(array('rss', 'feeds/rss'), function () {
             $article->title,
             Uri::full(Registry::get('posts_page')->slug . '/' . $article->slug),
             $article->description,
-            $article->created
+            $article->created,
+            $article->comments
         );
     }
 
