@@ -199,7 +199,7 @@ Route::post($posts_page->slug . '/(:any)', function ($slug) use ($posts_page) {
  */
 Route::get(array('rss', 'feeds/rss'), function () {
     $uri = 'http://' . $_SERVER['HTTP_HOST'];
-    $rss = new Rss(Config::meta('sitename'), Config::meta('description'), $uri, Config::app('language'));
+    $rss = new Rss(Config::meta('sitename'), Config::meta('description'), $uri, str_replace('_', '-', Config::app('language')));
 
     $query = Post::where('status', '=', 'published')->sort(Base::table('posts.created'), 'desc')->take(25);
 
