@@ -25,6 +25,8 @@ class rss
     {
         // create a dom xml object
         $this->document = new DOMDocument('1.0', 'UTF-8');
+        $this->document->preserveWhiteSpace = false;
+        $this->document->formatOutput = true;
 
         // create our rss feed
         $rss = $this->element('rss', null, array('version' => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom'));
@@ -69,7 +71,7 @@ class rss
         $this->channel->appendChild($atom);
     }
 
-    public function item($title, $url, $description, $date, $comments)
+    public function item($title, $url, $description, $date, $comments, $category_title, $category_slug)
     {
         $item = $this->element('item');
         $this->channel->appendChild($item);
@@ -99,6 +101,12 @@ class rss
             $comments = $this->element('comments', $url . '#comment');
             $item->appendChild($comments);
         }
+
+        // category
+        $category = $this->element('category', $category_title, array(
+            'domain' => $category_slug
+        ));
+        $item->appendChild($category);
     }
 
     public function output()

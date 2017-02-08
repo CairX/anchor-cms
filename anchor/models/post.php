@@ -96,4 +96,16 @@ class post extends Base
     {
         return (Config::meta('show_all_posts') ? self::count() + 1 : Config::meta('posts_per_page'));
     }
+
+    public static function get_rss()
+    {
+        return static::left_join(Base::table('categories'), Base::table('categories.id'), '=', Base::table('posts.category'))
+            ->where('status', '=', 'published')
+            ->sort(Base::table('posts.created'), 'desc')
+            ->take(25)
+            ->get(array(
+                Base::table('posts.*'),
+                Base::table('categories.title as category_title'),
+                Base::table('categories.slug as category_slug')));
+    }
 }

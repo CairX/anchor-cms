@@ -201,15 +201,18 @@ Route::get(array('rss', 'feeds/rss'), function () {
     $uri = 'http://' . $_SERVER['HTTP_HOST'];
     $rss = new Rss(Config::meta('sitename'), Config::meta('description'), $uri, str_replace('_', '-', Config::app('language')));
 
-    $query = Post::where('status', '=', 'published')->sort(Base::table('posts.created'), 'desc')->take(25);
+    $articles = Post::get_rss();
 
-    foreach ($query->get() as $article) {
+
+    foreach ($articles as $article) {
         $rss->item(
             $article->title,
             Uri::full(Registry::get('posts_page')->slug . '/' . $article->slug),
             $article->description,
             $article->created,
-            $article->comments
+            $article->comments,
+            $article->category_title,
+            Uri::full('category/' . $article->category_slug)
         );
     }
 
