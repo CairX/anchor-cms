@@ -71,7 +71,7 @@ class rss
         $this->channel->appendChild($atom);
     }
 
-    public function item($title, $url, $description, $date, $comments, $category_title, $category_slug)
+    public function item($title, $url, $description, $date, $comments, $category_title, $category_slug, $image)
     {
         $item = $this->element('item');
         $this->channel->appendChild($item);
@@ -88,6 +88,10 @@ class rss
         $link = $this->element('link', $url);
         $item->appendChild($link);
 
+        // description image
+        if ($image) {
+            $description = "<img src=\"" . $image . "\" />" . $description;
+        }
         // description
         $description = $this->element('description', $description);
         $item->appendChild($description);

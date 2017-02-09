@@ -205,6 +205,11 @@ Route::get(array('rss', 'feeds/rss'), function () {
 
 
     foreach ($articles as $article) {
+        $image = null;
+        if ($extend = Extend::field('post', 'postpreviewimage', $article->id)) {
+            $image = Extend::value($extend, $image);
+        }
+
         $rss->item(
             $article->title,
             Uri::full(Registry::get('posts_page')->slug . '/' . $article->slug),
@@ -212,7 +217,8 @@ Route::get(array('rss', 'feeds/rss'), function () {
             $article->created,
             $article->comments,
             $article->category_title,
-            Uri::full('category/' . $article->category_slug)
+            Uri::full('category/' . $article->category_slug),
+            $image// ? Uri::base($image) : $image
         );
     }
 
