@@ -1,0 +1,16 @@
+			<footer id="bottom">
+				<div class="wrap">
+					<p>&copy; <?php echo date('Y'); ?> <?php echo site_name(); ?>. All rights reserved.</p>
+
+					<ul role="navigation">
+						<li><a href="<?php echo rss_url(); ?>">RSS</a></li>
+
+						<li><a href="<?php echo base_url('admin'); ?>" title="Administer your site!">Admin</a></li>
+
+						<li><a href="<?php echo base_url(); ?>" title="Return to my website.">Home</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

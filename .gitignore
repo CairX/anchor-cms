@@ -20,6 +20,7 @@ Thumbs.db
 # debug and custom themes
 /themes/*
 !/themes/default
+!/themes/panda
 
 # uploaded content
 /content/*
